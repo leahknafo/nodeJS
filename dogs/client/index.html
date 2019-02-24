@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='node_modules/jquery/dist/jquery.min.js'></script>
+</head>
+<body>
+    <div class="container">
+    <div id="content" class='content'>
+    </div>
+    <script>
+        const dogTemplate = `
+  <img class="card-img-top" src="{{dog}}" alt="Card image cap"  style="height:300px; width: 300px;">
+`
+        jQuery.ajax('http://localhost:8888/dogs').done(function (r) {
+            var dogsArray = JSON.parse(r)
+            var rand = dogsArray[Math.floor(Math.random() * dogsArray.length)];
+            console.log(rand);
+            let t = dogTemplate;
+            t = t.replace('{{dog}}', rand);
+            $('#content').append(t);
+        })    
+    </script>
+
+</body>
+
+</html>
